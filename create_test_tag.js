@@ -1,5 +1,11 @@
 const { exec } = require('child_process');
 
+const getTypeParameter = () => {
+  const flagIndex = process.argv.indexOf('--type');
+
+  return flagIndex > -1 ? process.argv[flagIndex + 1] : 'test';
+};
+
 const createAndPushTag = (tagName) => {
   exec(`git tag ${tagName}`, (error, sdtout) => {
     if (!error) {
@@ -32,15 +38,17 @@ const findMaxTagNumber = (branchTags) => {
 
 const grepTagNames = (currentBranch) => {
   exec(`git tag | grep ${currentBranch}`, (error, sdtout) => {
+    const type = getTypeParameter();
+
     if (!error) {
       const branchTags = sdtout.split('\n').slice(0, -1);
       const maxTagNumber = findMaxTagNumber(branchTags);
 
       if (maxTagNumber) {
-        createAndPushTag(`test_${currentBranch}_${maxTagNumber + 1}`);
+        createAndPushTag(`${type}_${currentBranch}_${maxTagNumber + 1}`);
       }
     } else {
-      createAndPushTag(`test_${currentBranch}_1`);
+      createAndPushTag(`${type}_${currentBranch}_1`);
     }
   });
 };

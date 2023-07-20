@@ -6,17 +6,19 @@ Uses `test_${CURRENT_BRANCH_NAME}_${LATEST_TAG_NUMBER + 1}` pattern.
 
 ### Example #1
 
-| Branch | `my-branch`        |                    |                    |     |
-| ------ | ------------------ | ------------------ | ------------------ | --- |
-| Tags   | `test_my-branch_1` | `test_my-branch_2` | `test_my-branch_3` |     |
+| Branch      | Tags               |
+| ----------- | ------------------ |
+| `my-branch` | `test_my-branch_1` |
+|             | `test_my-branch_2` |
+|             | `test_my-branch_3` |
 
 Result: `test_my-branch_4` and push to `origin`.
 
 ### Example #2
 
-| Branch | `my-branch` |     |     |     |
-| ------ | ----------- | --- | --- | --- |
-| Tags   | None        |     |
+| Branch      | Tags |
+| ----------- | ---- |
+| `my-branch` | None |
 
 Result: `test_my-branch_1` and push to `origin`.
 
@@ -29,6 +31,14 @@ Node >= v12.16.1
 ## Usage
 
 `node create_test_tag.js`
+
+### Arguments
+
+You can manage the prefix of the tag with the `--type` argument.
+
+`node create_test_tag.js --type staging`
+
+That would generate `staging_my-branch_1`
 
 ## Shell Usage
 
