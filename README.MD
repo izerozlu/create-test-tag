@@ -4,6 +4,8 @@ This simple script is being used for creating a new tag from the current git bra
 
 Uses `test_${CURRENT_BRANCH_NAME}_${LATEST_TAG_NUMBER + 1}` pattern.
 
+For further documentation please visit the [wiki](https://github.com/izerozlu/create_test_tag/wiki) page.
+
 ### Example #1
 
 | Branch      | Tags               |
