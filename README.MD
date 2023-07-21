@@ -65,3 +65,7 @@ If you want to make this script shell runnable, you can follow these steps:
 5. Run it
 
    `create_test_tag`
+
+## License
+
+This script is provided under the [MIT License](https://opensource.org/licenses/MIT).
