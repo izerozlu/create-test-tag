@@ -21,11 +21,14 @@ const createAndPushTag = (tagName) => {
   });
 };
 
-const findMaxTagNumber = (branchTags) => {
+const findMaxTagNumber = (branchTags, type) => {
   return branchTags.reduce((maxTagNumber, tagName) => {
-    let tagNumber;
+    let tagNumber = -1;
+    const splitTagName = tagName.split('_');
     try {
-      tagNumber = Number.parseInt(tagName.split('_').pop());
+      if (splitTagName[0] === type) {
+        tagNumber = Number.parseInt(splitTagName.pop());
+      }
     } catch (e) {
       tagNumber = -1;
     }
@@ -42,11 +45,9 @@ const grepTagNames = (currentBranch) => {
 
     if (!error) {
       const branchTags = sdtout.split('\n').slice(0, -1);
-      const maxTagNumber = findMaxTagNumber(branchTags);
+      const maxTagNumber = findMaxTagNumber(branchTags, type);
 
-      if (maxTagNumber) {
-        createAndPushTag(`${type}_${currentBranch}_${maxTagNumber + 1}`);
-      }
+      createAndPushTag(`${type}_${currentBranch}_${maxTagNumber + 1}`);
     } else {
       createAndPushTag(`${type}_${currentBranch}_1`);
     }
